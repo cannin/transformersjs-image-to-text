@@ -22,12 +22,12 @@ let countdown = original_countdown;
 let countdown_decrement = 100;
 
 // Set initial drawing properties
-context.imageSmoothingEnabled = true;
-ctx.strokeStyle = 'black';
+ctx.imageSmoothingEnabled = true;
+ctx.strokeStyle = '#000';
 ctx.lineWidth = 2;
 ctx.lineJoin = 'round';
 ctx.lineCap = 'round';
-ctx.fillStyle = "white";
+ctx.fillStyle = '#fff';
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 function startDrawing(e) {
@@ -61,7 +61,7 @@ function clearCanvas() {
   outputDiv.innerHTML = 'Text: ...';
 }
 
-function addEventListeners = (item, events, fn) => {
+const addEventListeners = (item, events, fn) => {
   for (let event of events) {
     item.addEventListener(event, fn);
   }
