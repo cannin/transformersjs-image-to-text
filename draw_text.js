@@ -18,11 +18,12 @@ let countdown = original_countdown;
 let countdown_decrement = 100;
 
 // Set initial drawing properties
-ctx.strokeStyle = '#000';
+context.imageSmoothingEnabled = true;
+ctx.strokeStyle = 'black';
 ctx.lineWidth = 2;
 ctx.lineJoin = 'round';
 ctx.lineCap = 'round';
-ctx.fillStyle = "#ffffff";
+ctx.fillStyle = "white";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 function startDrawing(e) {
