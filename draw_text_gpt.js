@@ -241,10 +241,10 @@ dropdown.addEventListener("change", () => {
       prompt = "what is written; no explanation";
       break;
     case "spelling_es":
-      prompt = "what spanish words are on the image; also, say 'corecto' or 'mal escrito' if not spelled in spanish correctly; no explanation";
+      prompt = "what spanish words are on the image; also, say 'corecto' or 'mal escrito' if not spelled in spanish correctly; always include the letters written; no explanation";
       break;
     case "spelling_en":
-      prompt = "what english words are on the image; also, say 'correct' or 'mispelled' if not spelled correctly in english; no explanation";
+      prompt = "what english words are on the image; also, say 'correct' or 'mispelled' if not spelled correctly in english; always include the letters written; no explanation";
       break;
     default:
       prompt = "what is written; no explanation";
