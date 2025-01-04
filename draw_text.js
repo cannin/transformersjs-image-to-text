@@ -2,6 +2,10 @@ import { pipeline } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers
 
 document.ontouchstart = function(e){ e.preventDefault(); }
 
+const START_DRAW_EVENTS = ['mousedown', 'touchstart'];
+const DRAW_EVENTS = ['mousemove', 'touchmove'];
+const STOP_DRAW_EVENTS = ['mouseup', 'mouseout', 'touchend'];
+
 const canvas = document.getElementById('drawingCanvas');
 const ctx = canvas.getContext('2d');
 const clearButton = document.getElementById('clearButton');
@@ -57,6 +61,12 @@ function clearCanvas() {
   outputDiv.innerHTML = 'Text: ...';
 }
 
+function addEventListeners = (item, events, fn) => {
+  for (let event of events) {
+    item.addEventListener(event, fn);
+  }
+}
+
 // Create image-to-text pipeline
 //const captioner = await pipeline('image-to-text', 'Xenova/trocr-small-handwritten', {device: 'webgpu'});
 const captioner = await pipeline('image-to-text', 'Xenova/trocr-small-handwritten');
@@ -81,10 +91,14 @@ async function generateDescription() {
 }
 
 // Event listeners
-canvas.addEventListener('mousedown', startDrawing);
-canvas.addEventListener('mousemove', draw);
-canvas.addEventListener('mouseup', stopDrawing);
-canvas.addEventListener('mouseout', stopDrawing);
+addEventListeners(canvas, START_DRAW_EVENTS, startDrawing);
+addEventListeners(canvas, DRAW_EVENTS, draw);
+addEventListeners(canvas, STOP_DRAW_EVENTS, stopDrawing);
+
+// canvas.addEventListener('mousedown', startDrawing);
+// canvas.addEventListener('mousemove', draw);
+// canvas.addEventListener('mouseup', stopDrawing);
+// canvas.addEventListener('mouseout', stopDrawing);
 
 clearButton.addEventListener('click', clearCanvas);
 
