@@ -32,13 +32,16 @@ ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 // Function to start drawing
 function startDrawing(event) {
+  event.preventDefault();
+  event.stopPropagation();
+
   isDrawing = true;
   const { x, y } = getPosition(event);
   lastX = x;
   lastY = y;
 }
 
-function draw(e) {
+function draw(event) {
   if (!isDrawing) return;
 
   const { x, y } = getPosition(event);
@@ -51,7 +54,10 @@ function draw(e) {
   lastY = y;
 }
 
-function stopDrawing() {
+function stopDrawing(event) {
+  event.preventDefault();
+  event.stopPropagation();
+
   isDrawing = false;
   ctx.beginPath();
 }
@@ -178,6 +184,9 @@ async function generateDescription() {
         console.error("Error fetching summary:", error);
     });
 }
+
+// Disable context menu on right-click
+canvas.addEventListener('contextmenu', (event) => event.preventDefault());
 
 // Event listeners
 addEventListeners(canvas, START_DRAW_EVENTS, startDrawing);
