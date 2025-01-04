@@ -64,6 +64,7 @@ function clearCanvas() {
 const addEventListeners = (item, events, fn) => {
   for (let event of events) {
     item.addEventListener(event, fn);
+    console.log("event: " + event);
   }
 }
 
@@ -75,7 +76,7 @@ function getQueryParam(param) {
 
 // Function to get value from localStorage or query param
 function getParamValue(param) {
-    const value = getQueryParam(param);
+    let value = getQueryParam(param);
 
     if (value) {
         localStorage.setItem(param, value);
@@ -91,8 +92,8 @@ function getParamValue(param) {
 }
 
 // Get values from query params or localStorage
-const apiKey = getParamValue('apikey');
-const apiUrl = "https://api.openai.com/v1/chat/completions";
+let apiKey = getParamValue('apikey');
+let apiUrl = "https://api.openai.com/v1/chat/completions";
 
 async function generateDescription() {
   generateButton.setAttribute("disabled", true);
