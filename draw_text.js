@@ -1,6 +1,8 @@
 import { pipeline } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.2.4';
 
-document.ontouchstart = function(e){ e.preventDefault(); }
+//document.ontouchstart = function(e){ e.preventDefault(); }
+const preventDefault = (e) => e.preventDefault();
+document.addEventListener('touchmove', preventDefault, { passive: false });
 
 const START_DRAW_EVENTS = ['mousedown', 'touchstart'];
 const DRAW_EVENTS = ['mousemove', 'touchmove'];
