@@ -1,5 +1,7 @@
 import { pipeline } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.2.4';
 
+document.ontouchstart = function(e){ e.preventDefault(); }
+
 const canvas = document.getElementById('drawingCanvas');
 const ctx = canvas.getContext('2d');
 const clearButton = document.getElementById('clearButton');
@@ -13,7 +15,7 @@ let lastY = 0;
 
 let original_countdown = 20.0;
 let countdown = original_countdown;
-let countdown_decrement = 100; 
+let countdown_decrement = 100;
 
 // Set initial drawing properties
 ctx.strokeStyle = '#000';
@@ -86,7 +88,7 @@ canvas.addEventListener('mouseout', stopDrawing);
 clearButton.addEventListener('click', clearCanvas);
 
 function debugMessage() {
-  console.log("hello world"); 
+  console.log("hello world");
 }
 
 generateButton.removeAttribute('disabled');
