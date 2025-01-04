@@ -15,6 +15,8 @@ body {
 canvas {
   border: 1px solid #000;
   cursor: crosshair;
+  display: block;
+  touch-action: none; /* Prevent scrolling when drawing */
 }
 button {
   margin-top: 10px;

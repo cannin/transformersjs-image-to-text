@@ -1,6 +1,6 @@
 //document.ontouchstart = function(e){ e.preventDefault(); }
-const preventDefault = (e) => e.preventDefault();
-document.addEventListener('touchmove', preventDefault, { passive: false });
+// const preventDefault = (e) => e.preventDefault();
+// document.addEventListener('touchmove', preventDefault, { passive: false });
 
 const START_DRAW_EVENTS = ['mousedown', 'touchstart'];
 const DRAW_EVENTS = ['mousemove', 'touchmove'];
@@ -30,25 +30,49 @@ ctx.lineCap = 'round';
 ctx.fillStyle = '#fff';
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-function startDrawing(e) {
+// Function to start drawing
+function startDrawing(event) {
   isDrawing = true;
-  [lastX, lastY] = [e.offsetX, e.offsetY];
+  const { x, y } = getPosition(event);
+  lastX = x;
+  lastY = y;
 }
 
 function draw(e) {
   if (!isDrawing) return;
 
+  const { x, y } = getPosition(event);
   ctx.beginPath();
   ctx.moveTo(lastX, lastY);
-  ctx.lineTo(e.offsetX, e.offsetY);
+  ctx.lineTo(x, y);
   ctx.stroke();
 
-  [lastX, lastY] = [e.offsetX, e.offsetY];
+  lastX = x;
+  lastY = y;
 }
 
 function stopDrawing() {
   isDrawing = false;
   ctx.beginPath();
+}
+
+// Helper function to get position from mouse or touch event
+function getPosition(event) {
+  const rect = canvas.getBoundingClientRect();
+  if (event.touches) {
+    // Touch event
+    const touch = event.touches[0];
+    return {
+      x: touch.clientX - rect.left,
+      y: touch.clientY - rect.top
+    };
+  } else {
+    // Mouse event
+    return {
+      x: event.clientX - rect.left,
+      y: event.clientY - rect.top
+    };
+  }
 }
 
 function clearCanvas() {
@@ -190,4 +214,3 @@ function updateCountdown() {
 
 // Update countdown every X seconds
 //setInterval(updateCountdown, countdown_decrement);
-
