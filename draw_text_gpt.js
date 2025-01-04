@@ -246,6 +246,9 @@ dropdown.addEventListener("change", () => {
     case "spelling_en":
       prompt = "what english words are on the image; also, say 'correct' or 'mispelled' if not spelled correctly in english; always include the letters written; no explanation";
       break;
+      case "translate":
+        prompt = "if the words written in the image are in english then translate to spanish and vice versa; no explanation";
+        break;
     default:
       prompt = "what is written; no explanation";
       break;
