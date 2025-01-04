@@ -9,8 +9,8 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
-  background-color: darkgrey;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  /*background-color: #FFE6E6;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; */
 }
 canvas {
   border: 1px solid #000;
@@ -18,6 +18,7 @@ canvas {
   display: block;
   touch-action: none; /* Prevent scrolling when drawing */
 }
+/*
 button {
   margin-top: 10px;
   padding: 10px 20px;
@@ -30,11 +31,15 @@ button {
 }
 button:hover {
   background-color: darkred;
+}*/
+#buttonContainer {
+  display: flex;
+  gap: 10px; /* Adjust spacing between buttons */
+  margin-top: 10px; /* Optional: space above the buttons */
+  z-index: 10;
 }
-#spinner {
-  display: none;
-  margin-top: 10px;
-}
-#spinner.show {
-  display: block;
+#outputDiv {
+  padding: 6px 6px;
+  font-size: 24px;
+  font-weight: bold;
 }

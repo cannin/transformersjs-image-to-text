@@ -25,6 +25,8 @@ const addEventListeners = (item, events, fn) => {
 
 // Function to start drawing
 function startDrawing(event) {
+  event.preventDefault();
+  event.stopPropagation();
   isDrawing = true;
   const { x, y } = getPosition(event);
   lastX = x;
@@ -32,13 +34,17 @@ function startDrawing(event) {
 }
 
 // Function to stop drawing
-function stopDrawing() {
+function stopDrawing(event) {
+  event.preventDefault();
+  event.stopPropagation();
   isDrawing = false;
   ctx.beginPath(); // Reset the path
 }
 
 // Function to draw on the canvas
 function draw(event) {
+  event.preventDefault();
+  event.stopPropagation();
   if (!isDrawing) return;
 
   const { x, y } = getPosition(event);
@@ -78,8 +84,17 @@ addEventListeners(canvas, START_DRAW_EVENTS, startDrawing);
 addEventListeners(canvas, DRAW_EVENTS, draw);
 addEventListeners(canvas, STOP_DRAW_EVENTS, stopDrawing);
 
+// Disable context menu on right-click
+canvas.addEventListener('contextmenu', (event) => event.preventDefault());
+
 // Resize canvas when the window size changes
 window.addEventListener('resize', () => {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
+});
+
+// Add click event to the button
+const alertButton = document.getElementById('alertButton');
+alertButton.addEventListener('click', () => {
+  alert('Hello, World!');
 });

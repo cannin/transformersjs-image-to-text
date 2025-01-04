@@ -88,7 +88,7 @@ function clearCanvas() {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   countdown = original_countdown;
-  outputDiv.innerHTML = 'Text: ...';
+  outputDiv.innerHTML = '...';
 }
 
 const addEventListeners = (item, events, fn) => {
@@ -125,8 +125,11 @@ function getParamValue(param) {
 let apiKey = getParamValue('apikey');
 let apiUrl = "https://api.openai.com/v1/chat/completions";
 
+let prompt = "what is written; no explanation";
+
 async function generateDescription() {
   generateButton.setAttribute("disabled", true);
+  console.log(`Prompt: ${prompt}`);
 
   // NOTE: await not needed, but the image (canvas specifically) does need a background color with ctx.fillRect
   const image = canvas.toDataURL('image/png'); console.log("Base64 Image:", image);
@@ -145,7 +148,7 @@ async function generateDescription() {
                 content: [
                     {
                         type: "text",
-                        text: "what is written; no explanation"
+                        text: prompt
                     },
                     {
                         type: "image_url",
@@ -176,7 +179,7 @@ async function generateDescription() {
         const result = apiData.choices[0].message.content;
 
         console.log("LLM Text:", result);
-        output.innerHTML = "Text: " + result;
+        output.innerHTML = result;
 
         generateButton.removeAttribute("disabled");
     })
@@ -223,3 +226,30 @@ function updateCountdown() {
 
 // Update countdown every X seconds
 //setInterval(updateCountdown, countdown_decrement);
+
+// Get the dropdown element
+const dropdown = document.getElementById("dropdown");
+
+// Add an event listener to handle changes
+dropdown.addEventListener("change", () => {
+  // Set `x` based on the selected value
+  switch (dropdown.value) {
+    case "describe":
+      prompt = "the image is a simple line drawing of an object. what is the object in 1 to 5 words; no explanation";
+      break;
+    case "text":
+      prompt = "what is written; no explanation";
+      break;
+    case "spelling_es":
+      prompt = "what spanish words are on the image; also, say 'corecto' or 'mal escrito' if not spelled in spanish correctly; no explanation";
+      break;
+    case "spelling_en":
+      prompt = "what english words are on the image; also, say 'correct' or 'mispelled' if not spelled correctly in english; no explanation";
+      break;
+    default:
+      prompt = "what is written; no explanation";
+      break;
+  }
+
+  console.log(`Prompt: ${prompt}`);
+});

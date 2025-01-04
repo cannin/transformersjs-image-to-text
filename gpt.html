@@ -5,14 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Canvas Image Description</title>
   <link rel="stylesheet" href="draw_text.css">
+  <link rel="stylesheet" href="classless.css">
   <script src="draw_text_gpt.js" type="module" defer></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 </head>
 <body>
   <canvas id="drawingCanvas" width="360" height="480"></canvas>
-  <button id="clearButton">Clear</button>
-  <button id="generateButton" disabled>Get Text</button>
+  <div id="buttonContainer">
+    <button id="generateButton" disabled>Submit</button>
+    <select id="dropdown">
+      <option value="text">Get Text</option>
+      <option value="describe">Describe</option>
+      <option value="spelling_es">Spelling (ES)</option>
+      <option value="spelling_en">Spelling (EN)</option>
+    </select>
+    <button id="clearButton">Clear</button>
+  </div>
   <!--<div id="countdownDiv">Time Left: 20.0 seconds</div>-->
-  <div id="outputDiv">Text: ...</div>
+  <div id="outputDiv">...</div>
 </body>
 </html>

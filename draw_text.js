@@ -1,4 +1,5 @@
 import { pipeline } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.2.4';
+//import { pipeline } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.3.1'; // Files not found
 
 //document.ontouchstart = function(e){ e.preventDefault(); }
 const preventDefault = (e) => e.preventDefault();
@@ -60,7 +61,7 @@ function clearCanvas() {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   countdown = original_countdown;
-  outputDiv.innerHTML = 'Text: ...';
+  outputDiv.innerHTML = '...';
 }
 
 const addEventListeners = (item, events, fn) => {
@@ -72,6 +73,7 @@ const addEventListeners = (item, events, fn) => {
 // Create image-to-text pipeline
 //const captioner = await pipeline('image-to-text', 'Xenova/trocr-small-handwritten', {device: 'webgpu'});
 const captioner = await pipeline('image-to-text', 'Xenova/trocr-small-handwritten');
+//const captioner = await pipeline('image-to-text', 'Xenova/quickdraw-mobilevit-small');
 //const captioner = await pipeline('image-to-text', 'Xenova/trocr-base-handwritten');
 
 async function generateDescription() {
@@ -85,7 +87,7 @@ async function generateDescription() {
   const result = await captioner(image);
 
   console.log("LLM Text:", result[0].generated_text);
-  output.innerHTML = "Text: " + result[0].generated_text;
+  output.innerHTML = result[0].generated_text;
 
   //spinner.classList.remove('show');
   generateButton.removeAttribute("disabled");
